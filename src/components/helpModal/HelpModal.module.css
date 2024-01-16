@@ -1,0 +1,103 @@
+.openM {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  border-radius: 50%;
+  inset: 1.75em;
+  width: 3em;
+  aspect-ratio: 1;
+}
+.openM > svg {
+  stroke: var(--accent1);
+  width: 80%;
+  height: 80%;
+}
+.modal {
+  max-width: 60%;
+  background-color: hsl(var(--background_hsl), 0.5);
+  border: 1.5px solid var(--accent1);
+  border-radius: 1em;
+  backdrop-filter: blur(10px);
+}
+.modal::backdrop {
+  background: rgb(0, 0, 0, 0.3);
+}
+.modal[open] {
+  animation: myFadeIn 0.5s ease normal;
+}
+
+@keyframes myFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.hbar {
+  padding-inline: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+.hbar h3 {
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+}
+.Details {
+  display: grid;
+  gap: 0.5em;
+}
+.Details > div {
+  display: flex;
+  gap: 1em;
+}
+.Details div span {
+  width: 5em;
+  min-width: 5em;
+
+  margin-block: auto;
+  text-align: right;
+  font-size: large;
+  font-weight: 700;
+}
+.Details div ul {
+  text-align: left;
+  /* list-style: none; */
+  margin: 0;
+  padding: 0;
+  padding-left: 1.25em;
+}
+.closeM {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 50%;
+  inset: 1.75em;
+  width: 3em;
+  aspect-ratio: 1;
+}
+.closeM:hover {
+  background-color: hsl(var(--background_hsl), 0.4);
+}
+.closeM > svg {
+  stroke: var(--accent1);
+  width: 80%;
+  height: 80%;
+}
+@media screen and (max-width: 1000px) {
+  .modal {
+    max-width: 75%;
+  }
+}

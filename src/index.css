@@ -1,0 +1,98 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* * light mode  */
+
+  /* * dark mode  */
+}
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: clip;
+  background-color: var(--background);
+  position: relative;
+}
+.sr-only {
+  position: absolute;
+  margin: -1px 0 0 -1px;
+  padding: 0;
+  display: block;
+  width: 1px;
+  height: 1px;
+  font-size: 1px;
+  line-height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  outline: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #000;
+    --b: #000;
+
+    color-scheme: light;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+:root[color-scheme="light"] {
+  --background: hsl(0, 0%, 100%);
+  --background_hsl: 0, 0%, 100%;
+
+  --menubg: hsl(220, 14%, 95%);
+  --menuexpandbg: hsl(220, 14%, 88%);
+
+  --panelbg: hsl(220, 34%, 88%);
+  --panelbtn: hsl(220, 34%, 60%);
+
+  --menuhighlight: hsl(220, 14%, 85%);
+  --menuaccent1: hsl(131, 60%, 75%);
+  --menuaccent2: hsl(206, 58%, 84%);
+
+  --accent1: hsl(0, 0%, 12%);
+  --accent2: hsl(206, 58%, 78%);
+  --toggleBG: hsl(131, 35%, 50%);
+
+  --accent1_hsl: 0, 0%, 12%;
+
+  color-scheme: light;
+}
+:root[color-scheme="dark"] {
+  --background: hsl(0, 0%, 12%);
+  --background_hsl: 0, 0%, 12%;
+
+  --menubg: hsl(0, 0%, 15%);
+  --menuexpandbg: hsl(0, 0%, 20%);
+
+  --panelbg: hsl(0, 0%, 25%);
+  --panelbtn: hsl(0, 0%, 15%);
+
+  --menuhighlight: hsl(220, 14%, 22%);
+  --menuaccent1: hsl(124, 37%, 23%);
+  --menuaccent2: hsl(208, 30%, 32%);
+
+  --accent1: hsl(0, 0%, 80%);
+  --accent2: hsl(0, 0%, 32%);
+  --toggleBG: hsl(124, 37%, 50%);
+
+  --accent1_hsl: 0, 0%, 80%;
+
+  color-scheme: dark;
+}

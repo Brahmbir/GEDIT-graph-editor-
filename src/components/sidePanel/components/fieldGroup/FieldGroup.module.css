@@ -1,0 +1,32 @@
+.group {
+  min-inline-size: min-content;
+  position: relative;
+  margin-top: 1.25em;
+  border: 1px solid hsl(var(--accent1_hsl), 0.3);
+  border-radius: 0.5em;
+  padding: 1.25em 0.5em;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+.group[data-disable="true"] .tittle,
+.group[data-disable="true"] > span {
+  color: hsl(var(--accent1_hsl), 0.5);
+}
+.group > span {
+  user-select: none;
+  pointer-events: none;
+}
+.tittle {
+  color: inherit;
+  position: absolute;
+  text-transform: capitalize;
+  top: 0%;
+  transform: translateY(-62.5%);
+  left: 10%;
+  width: fit-content;
+  background-color: var(--panelbg);
+  margin: 0;
+  padding: 0;
+  padding-inline: 0.25em;
+}

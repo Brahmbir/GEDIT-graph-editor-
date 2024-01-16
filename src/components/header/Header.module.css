@@ -1,0 +1,162 @@
+.header {
+  --gap: 1.25em;
+  box-sizing: border-box;
+  background-color: var(--menubg);
+  z-index: 100;
+  width: 7em;
+  height: 100vh;
+  padding: 1.5em 1.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: clip;
+  overflow-y: visible;
+  position: relative;
+  transition: background-color 0.3s;
+}
+.header nav {
+  display: flex;
+  position: relative;
+
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.mobile_toggle {
+  display: none;
+}
+.mid {
+  display: none;
+}
+.mid h1 {
+  text-transform: capitalize;
+  color: var(--accent1);
+  font-weight: 600;
+  font-size: 1.75em;
+}
+.Logo {
+  border-radius: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 5.5em;
+  max-height: 5.5em;
+  aspect-ratio: 1/1;
+  background-color: var(--menuaccent1);
+}
+.Logo > svg {
+  stroke: var(--accent1);
+  fill: var(--accent1);
+  scale: 0.7;
+}
+
+/* todo hidden menu */
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  margin: 0;
+  gap: var(--gap);
+}
+.navigation a {
+  text-decoration: none;
+}
+@media screen and (max-width: 1000px) {
+  .header {
+    width: 100vw;
+    height: 5em;
+    flex-direction: row;
+    padding: 0.75em 1.2em;
+    overflow-y: clip;
+    overflow-x: visible;
+  }
+  .mobile_toggle {
+    border-radius: 50%;
+    /* position: absolute; */
+    background-color: transparent;
+    z-index: 10000;
+    inset: 0.75em 0 0 1.2em;
+    max-width: 5em;
+    height: calc(100% - 0em);
+    max-height: 5em;
+    padding: 0;
+    border: 0;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+  }
+  .mobile_toggle::after,
+  .mobile_toggle::before {
+    content: " ";
+    border-radius: 5em;
+    width: 55%;
+    height: 0.3em;
+    background-color: var(--accent1);
+    transform: translateY(0%);
+    transition: transform 0.2s;
+  }
+  .MIcon::after {
+    transform: rotateZ(45deg) translateY(-0.35em) translateX(-12.5%);
+  }
+  .MIcon::before {
+    transform: rotateZ(-45deg) translateY(0.35em) translateX(-12.5%);
+  }
+  .mobile_toggle:hover {
+    background-color: var(--menuhighlight);
+  }
+  .mid {
+    flex: 1;
+    margin-left: calc(1.5 * var(--gap));
+    /* justify-content: center; */
+    align-items: center;
+    display: flex;
+  }
+  .mid h1 {
+    text-transform: capitalize;
+  }
+  .Logo {
+    align-self: start;
+    margin-left: 1em;
+    height: 100%;
+    border-radius: 1em;
+    width: auto;
+    aspect-ratio: 1/1;
+    position: relative;
+  }
+  .Logo::before {
+    left: calc(100% + 1em);
+    color: var(--accent1);
+    font-weight: 600;
+    font-size: 1.75em;
+    position: absolute;
+    content: "GEDIT";
+  }
+  .header nav {
+    position: fixed;
+    width: 20em;
+    inset: 0 30% 0 0;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: min(20vh, 10rem) 2em;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+    background-color: var(--menuexpandbg);
+    border-radius: 0 1.25em 1.25em 0;
+    gap: 3em;
+  }
+  .header nav[data-visible="true"] {
+    transform: translateX(0%);
+  }
+  .navigation {
+    width: 100%;
+  }
+}

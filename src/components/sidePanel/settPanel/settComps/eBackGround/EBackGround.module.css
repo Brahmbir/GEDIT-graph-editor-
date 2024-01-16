@@ -1,0 +1,69 @@
+.btn {
+  position: relative;
+  border-radius: 2px;
+  height: 100%;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+  color: #11552b;
+}
+
+.knobs {
+  z-index: 2;
+}
+
+.btn .knobs:before,
+.btn .knobs:after,
+.btn .knobs span {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding-block: 0.4em;
+  border-radius: 0.5em;
+  transition: 0.3s ease all;
+}
+
+.btn .knobs:before {
+  content: "";
+  left: 0px;
+  background-color: var(--toggleBG);
+}
+
+.btn .knobs:after {
+  content: "Color";
+  right: 0px;
+  color: var(--accent1);
+}
+
+.btn .knobs span {
+  display: inline-block;
+  left: 0px;
+  color: var(--background);
+  z-index: 1;
+}
+
+.btn .checkbox:checked + .knobs span {
+  color: var(--accent1);
+}
+
+.btn .checkbox:checked + .knobs:before {
+  left: 50%;
+}
+
+.btn .checkbox:checked + .knobs:after {
+  color: var(--background);
+}

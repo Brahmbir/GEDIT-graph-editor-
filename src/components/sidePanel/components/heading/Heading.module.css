@@ -1,0 +1,12 @@
+.heading {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: large;
+  margin: 0;
+}
+.hr {
+  border-color: hsl(var(--accent1_hsl), 0.3);
+  border-style: solid;
+  width: 95%;
+  border-width: 1px;
+}

@@ -1,0 +1,98 @@
+.label {
+  display: flex;
+  box-sizing: border-box;
+  background-color: hsl(var(--accent1_hsl), 0.1);
+  padding-inline: 0.5em;
+  padding-block: 0.5em;
+  border-radius: 0.5em;
+  flex-shrink: 0;
+  justify-content: space-between;
+  position: relative;
+  overflow: clip;
+  width: 100%;
+}
+*[data-disable="true"] > .label {
+  filter: opacity(0.5) brightness(60%);
+  /* background-color: aquamarine; */
+}
+.label label {
+  height: min-content;
+  margin-block: auto;
+}
+.label input {
+  cursor: pointer;
+  text-transform: capitalize;
+  background-color: var(--background);
+  color: var(--accent1);
+  border-radius: 0.25em;
+  padding-left: 0.5em;
+  padding-block: 0.25em;
+  width: 47.5%;
+  min-width: 7em;
+  max-width: 9em;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.label input[disabled] {
+  cursor: default;
+}
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  height: 2.25em;
+  padding: 0;
+}
+input[type="color"]:focus {
+  border-radius: 0;
+  outline: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0.2em;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: 0.25em;
+}
+
+input[type="color"]::-moz-color-swatch,
+input[type="color"]::-moz-focus-inner {
+  border-radius: 0.25em;
+  border: 0;
+}
+
+input[type="color"]::-moz-focus-inner {
+  padding: 0;
+}
+
+input[type="file"] {
+  border-radius: 4px;
+}
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+.label select {
+  cursor: pointer;
+  text-transform: capitalize;
+  background-color: var(--background);
+  color: var(--accent1);
+  border-radius: 0.25em;
+  padding-left: 0.5em;
+  padding-block: 0.25em;
+  width: 40%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.label select option {
+  text-transform: capitalize;
+  padding: 30px;
+}

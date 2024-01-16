@@ -1,0 +1,37 @@
+.Sform {
+  display: flex;
+  gap: 1em;
+  padding-inline: 0.25em;
+}
+.Sform > input[type="text"] {
+  appearance: none;
+  flex: 1;
+  border: none;
+  outline: none;
+  border-bottom: 0.2em solid hsl(var(--accent1_hsl), 0.6);
+  background: hsl(var(--background_hsl), 0.75);
+  border-radius: 0.2em 0.2em 0 0;
+  padding: 0.4em;
+  color: var(--accent1);
+}
+.Sform > button {
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: flex;
+  height: 100%;
+  aspect-ratio: 1;
+}
+.Sform > button:hover {
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: flex;
+  height: 100%;
+  aspect-ratio: 1;
+}
+.Sform > button > svg {
+  margin: auto;
+  height: 60%;
+  width: 60%;
+}

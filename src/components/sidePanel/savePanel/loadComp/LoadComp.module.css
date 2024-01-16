@@ -1,0 +1,130 @@
+.loadCard {
+  background-color: var(--accent2);
+  position: relative;
+  width: calc(100%);
+  box-sizing: border-box;
+  padding: 1em 0.75em;
+  border-radius: 0.75em;
+  height: fit-content;
+  display: grid;
+  gap: 1em;
+}
+.topBar {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+.topBar span {
+  padding-left: 1.5em;
+  max-width: calc(clamp(20rem, 30vw, 30rem) - 4em - 2em - 1.5em);
+  text-align: left;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  color: hsl(var(--accent1_hsl), 0.5);
+}
+.topBar span::before {
+  font-size: 1.25em;
+  bottom: -0.1em;
+  font-weight: 700;
+  left: 0;
+  color: var(--accent1);
+  position: absolute;
+  content: "ID";
+}
+.topBar button {
+  display: flex;
+  border-radius: 3em;
+  padding: 0;
+  border: 0;
+  width: 3em;
+  height: 3em;
+  background-color: initial;
+  transition: background-color 0.3s;
+}
+.topBar button:hover {
+  background-color: var(--background);
+}
+.topBar button svg {
+  width: 70%;
+  margin: auto;
+  height: 70%;
+}
+.form {
+  overflow: clip;
+  display: flex;
+  gap: 1em;
+}
+.inp {
+  flex: 1;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  vertical-align: baseline;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: 0.16px;
+  border-radius: 0;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  height: 2.25em;
+  border: none;
+  border-bottom: 1.5px solid var(--accent1);
+  background-color: var(--panelbg);
+  padding: 0 0.5em;
+  color: var(--accent1);
+  transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+.inp:focus {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+}
+.btnBar {
+  display: flex;
+  justify-content: space-around;
+}
+.btnBar button {
+  background-color: hsl(var(--background_hsl), 0.5);
+  border: 1px solid var(--accent1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: var(--accent1);
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 0.4em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+    transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: auto;
+}
+.btnBar button:hover {
+  background-color: var(--background);
+}
+
+.btnBar button:focus-visible {
+  box-shadow: var(--accent1) 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow 0.2s;
+}
+
+.btnBar button:active {
+  background-color: var(--background);
+  border-color: var(--accent1);
+  transform: scale(0.96);
+}

@@ -1,0 +1,61 @@
+.ThemeBtn {
+  align-self: center;
+  width: 80%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: inherit;
+  padding: 0;
+  border: 1.5px solid var(--accent1);
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.ThemeBtn:hover {
+  background-color: var(--menuhighlight);
+}
+.ThemeBtn svg {
+  stroke: var(--accent1);
+  inset: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.1s, top 0.3s;
+}
+#lightIco {
+  scale: 0.7;
+}
+#darkIco {
+  scale: 0.4;
+}
+.ThemeBtn:hover svg {
+  fill: var(--accent1);
+}
+/* ! light mode style  */
+[color-scheme="light"] #lightIco {
+  top: 0%;
+  opacity: 1;
+}
+[color-scheme="light"] #darkIco {
+  top: 100%;
+  opacity: 0;
+}
+
+/* ! dark mode style  */
+
+[color-scheme="dark"] #lightIco {
+  top: -100%;
+  opacity: 0;
+}
+[color-scheme="dark"] #darkIco {
+  top: 0%;
+  opacity: 1;
+}
+@media screen and (max-width: 1000px) {
+  .ThemeBtn {
+    width: auto;
+    height: 100%;
+  }
+}

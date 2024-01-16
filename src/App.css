@@ -1,0 +1,13 @@
+#root {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+@media screen and (max-width: 1000px) {
+  #root {
+    flex-direction: column;
+  }
+}
