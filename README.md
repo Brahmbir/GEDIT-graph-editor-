@@ -25,7 +25,7 @@ GEDIT is a Graph Editor designed to simplify and enhance your graph data structu
 ```bash
 git clone https://github.com/Brahmbir/GEDIT-graph-editor-.git
 
-cd your-portfolio
+cd GEDIT-graph-editor-
 ```
 
 2. Install Dependencies:
