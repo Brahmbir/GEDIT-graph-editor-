@@ -202,9 +202,4 @@ export default class Viewport {
   }
 }
 
-let BGImage = [
-  "/pattern1.svg",
-  "/pattern0.svg",
-  "/pattern2.svg",
-  "/pattern3.svg",
-];
+let BGImage = ["pattern1.svg", "pattern0.svg", "pattern2.svg", "pattern3.svg"];
