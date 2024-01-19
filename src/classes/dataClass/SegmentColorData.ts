@@ -2,8 +2,8 @@ import { Color } from "../graphEditor";
 
 export default class SegmentColorData {
   public S_StrokeColor: Color = ["#22aa55", "#6571ca", "#fdede1"];
+  public S_TextColor: Color = ["#22aa55", "#6571ca", "#fdede1"];
 
-  public S_TextColor: Color = ["#2a5", "", ""];
   public S_HoverStrokeColor: Color = ["#2a5", "", ""];
   public S_SelectStrokeColor: Color = ["#2a5", "", ""];
 

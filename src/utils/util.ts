@@ -1,3 +1,4 @@
+import Segment from "../classes/primitives/segment";
 import Vertex from "../classes/primitives/vertex";
 
 interface Point {
@@ -5,7 +6,7 @@ interface Point {
   y: number;
 }
 
-function distance(p1: Vertex, p2: Vertex) {
+function distance(p1: Vertex | Point, p2: Vertex | Point) {
   return Math.hypot(p1.x - p2.x, p1.y - p2.y);
 }
 
@@ -21,6 +22,22 @@ export function getNearestVertex(
     if (dist < shortestDistance && dist < threshold) {
       shortestDistance = dist;
       nearest = vertex;
+    }
+  }
+  return nearest;
+}
+export function getNearestSegment(
+  center: Vertex,
+  segments: Segment[],
+  threshold = Number.MAX_SAFE_INTEGER
+): Segment | null {
+  let shortestDistance = Number.MAX_SAFE_INTEGER;
+  let nearest: Segment | null = null;
+  for (const segment of segments) {
+    let dist = distance(segment.center(), center);
+    if (dist < shortestDistance && dist < threshold) {
+      shortestDistance = dist;
+      nearest = segment;
     }
   }
   return nearest;

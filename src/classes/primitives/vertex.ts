@@ -1,5 +1,7 @@
+import { ChangeEvent } from "react";
 import VertexColorData from "../dataClass/VertexColorData";
 import { Theme } from "../graphEditor";
+import { v4 as UuidV4 } from "uuid";
 
 interface vertexDraw {
   size?: number;
@@ -9,18 +11,23 @@ interface vertexDraw {
 export default class Vertex {
   public x: number;
   public y: number;
-  public name: string;
+  public label: string;
+  public VertexId: string;
 
-  // public id
-
-  // * all Colors for Vertex
-
-  constructor(x: number, y: number, name: string = "Ab") {
+  constructor(
+    x: number,
+    y: number,
+    label: string = " ",
+    Id: string = UuidV4()
+  ) {
     this.x = x;
     this.y = y;
-    this.name = name;
+    this.label = label;
+    this.VertexId = Id;
   }
-
+  setName(event: ChangeEvent) {
+    this.label = (event.target as HTMLInputElement).value;
+  }
   equals(node: Vertex | { x: number; y: number; name: string }) {
     return this.x == node.x && this.y == node.y;
   }
@@ -69,8 +76,8 @@ export default class Vertex {
     ctx.font = "22px roboto";
     ctx.textAlign = "center";
 
-    // ctx.fillStyle = COLOR.V_TextColor[ETheme];
-    // ctx.fillText(this.name, this.x, this.y + rad / 4, size);
+    ctx.fillStyle = COLOR.V_TextColor[ETheme];
+    ctx.fillText(this.label, this.x, this.y + rad / 4, size);
     ctx.restore();
   }
 }

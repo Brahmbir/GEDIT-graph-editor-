@@ -1,4 +1,5 @@
 .shell {
+  position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -7,4 +8,69 @@
   width: 100%;
   height: 100%;
   background-color: #2a5;
+}
+.detailBox {
+  outline: 1.5px solid var(--accent1);
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  background-color: hsl(var(--panelbg_hsl), 0.8);
+  border-radius: 0.5em;
+  bottom: 0.75em;
+  left: 0.75em;
+  padding: 0.4em 0.5em;
+  color: var(--accent1);
+  height: 2em;
+  overflow: hidden;
+  transition: height 0.2s;
+}
+.detailBox[data-hid="false"] {
+  height: 10em;
+}
+.detailBox > div {
+  width: 100%;
+}
+.dData {
+  padding-inline: 0.15em;
+  display: grid;
+  gap: 0.2em;
+}
+.dData p {
+  width: 100%;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dData p span {
+  font-weight: 600;
+  font-size: 1.15em;
+}
+.interaction {
+  height: 1.75em;
+  display: flex;
+  justify-content: space-between;
+}
+.interaction h3 {
+  margin: 0;
+}
+.interaction button {
+  border: 0;
+  padding: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.475em;
+  background-color: initial;
+}
+.interaction button:hover {
+  background-color: var(--panelbtn);
+}
+.interaction button svg {
+  height: 80%;
+  padding: 10%;
+  width: auto;
+  aspect-ratio: 1;
 }

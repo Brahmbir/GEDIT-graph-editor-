@@ -6,7 +6,7 @@ export default class VertexColorData {
   public V_HoverFillColor: Color = ["#1d954b", "#2a309d", "#0982be"];
   public V_SelectGradientFillColor: Color = ["#ffffff", "#040505", "#c8715b"];
 
-  public V_TextColor: Color = ["#2a5", "", "#111"];
+  public V_TextColor: Color = ["#222222", "#cccccc", "#000000"];
 
   constructor(data?: {
     V_StrokeColor: Color;

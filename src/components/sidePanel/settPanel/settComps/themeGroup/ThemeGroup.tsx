@@ -40,7 +40,7 @@ export default function () {
               type="color"
             />
           </PInput>
-          {/* <PInput tittle="Text Color" forId="VTC">
+          <PInput tittle="Text Color" forId="VTC">
             <input
               id="VTC"
               disabled={!isCustomShow}
@@ -50,7 +50,7 @@ export default function () {
               defaultValue={Vertex?.V_TextColor[2]}
               type="color"
             />
-          </PInput> */}
+          </PInput>
           <PInput tittle="Hover Vertex Color" forId="HSVC">
             <input
               id="HSVC"
@@ -87,7 +87,7 @@ export default function () {
               type="color"
             />
           </PInput>
-          {/* <PInput tittle="Text Color" forId="STC">
+          <PInput tittle="Text Color" forId="STC">
             <input
               id="STC"
               disabled={!isCustomShow}
@@ -97,7 +97,8 @@ export default function () {
               defaultValue={Segment?.S_TextColor[2]}
               type="color"
             />
-          </PInput> 
+          </PInput>
+          {/* 
           <PInput tittle="Hover Segment Color" forId="HSSC">
             <input
               id="HSSC"

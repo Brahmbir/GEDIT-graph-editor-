@@ -16,14 +16,21 @@ export default class Graph {
     const vertexs: Vertex[] = [];
     const segments: Segment[] = [];
     for (const vertexInfo of info.vertexs) {
-      vertexs.push(new Vertex(vertexInfo.x, vertexInfo.y));
+      vertexs.push(
+        new Vertex(
+          vertexInfo.x,
+          vertexInfo.y,
+          vertexInfo.label,
+          vertexInfo.VertexId
+        )
+      );
     }
-    // Todo add id to verters and segment
     for (const segmentInfo of info.segments) {
       segments.push(
         new Segment(
           vertexs.find((v) => v.equals(segmentInfo.v1))!,
-          vertexs.find((v) => v.equals(segmentInfo.v2))!
+          vertexs.find((v) => v.equals(segmentInfo.v2))!,
+          segmentInfo.value
         )
       );
     }
@@ -96,9 +103,7 @@ export default class Graph {
     SegmentColor: SegmentColorData
   ) {
     for (const seg of this.segments) {
-      seg.draw(ctx, ETheme, SegmentColor, {
-        dash: [],
-      });
+      seg.draw(ctx, ETheme, SegmentColor, {});
     }
 
     for (const vertex of this.vertexs) {

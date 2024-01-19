@@ -1,7 +1,7 @@
 import Graph from "./main/graph";
 // import Segment from "./primitives/segment";
 import Vertex from "./primitives/vertex";
-import { getNearestVertex } from "../utils/util";
+import { getNearestSegment, getNearestVertex } from "../utils/util";
 import Segment from "./primitives/segment";
 import Viewport from "./main/viewport";
 import VertexColorData from "./dataClass/VertexColorData";
@@ -11,6 +11,11 @@ export enum Theme {
   light,
   dark,
   custom,
+}
+
+export type ISelect = Vertex | Segment | null;
+interface IProxy {
+  selected: ISelect;
 }
 
 export type Color = [string, string, string];
@@ -32,16 +37,38 @@ export default class GraphEditor {
 
   public font = new FontFace("roboto", "url(Roboto-Regular.ttf)");
 
-  //   public selected: Vertex | Segment | null = null;
-  public selected: Vertex | null = null;
-  //   public hovered: Vertex | Segment | null = null;
-  public hovered: Vertex | null = null;
+  private ProxyS: { selected: ISelect };
 
-  constructor(viewport: Viewport, graph: Graph) {
+  public selected: ISelect = null;
+
+  public hovered: ISelect = null;
+  // public hovered: Vertex | null = null;
+
+  constructor(viewport: Viewport, graph: Graph, SelectFunction: Function) {
     this.viewport = viewport;
     this.canvas = viewport.canvas;
     this.graph = graph;
     this.ctx = this.canvas.getContext("2d")!;
+
+    this.ProxyS = new Proxy<IProxy>(
+      {
+        selected: null,
+      },
+      {
+        get: (target: IProxy, key: "selected") => {
+          return target[key];
+        },
+        set: (
+          target: IProxy,
+          property: "selected",
+          value: ISelect
+        ): boolean => {
+          SelectFunction(() => value);
+          target[property] = value;
+          return true;
+        },
+      }
+    );
 
     // Color inti
     this.VertexColor = VertexColorData.Init();
@@ -57,15 +84,22 @@ export default class GraphEditor {
     );
     this.addEventListers();
   }
-  private select(vertex: Vertex) {
-    if (this.selected) {
-      this.graph.tryAddSegment(new Segment(this.selected, vertex));
+
+  private selectVexter(vertex: Vertex) {
+    if (this.ProxyS.selected && this.ProxyS.selected instanceof Vertex) {
+      this.graph.tryAddSegment(new Segment(this.ProxyS.selected, vertex));
     }
-    this.selected = vertex;
+    this.ProxyS.selected = vertex;
+  }
+  private selectSegment(segment: Segment) {
+    this.ProxyS.selected = segment;
   }
   public dispose() {
     this.graph.dispose();
-    this.selected = null;
+
+    // this.selected = null;
+    this.ProxyS.selected = null;
+
     this.hovered = null;
   }
   public autoSave() {
@@ -74,7 +108,8 @@ export default class GraphEditor {
 
   public loadGraph(GraphData: string) {
     this.graph = Graph.load(JSON.parse(GraphData));
-    this.selected = null;
+
+    this.ProxyS.selected = null;
     this.hovered = null;
   }
   public setTheme(Theme_num: Theme) {
@@ -85,21 +120,26 @@ export default class GraphEditor {
     this.canvas.addEventListener("mousedown", (event) => {
       if (event.button == 2) {
         //right click
-        if (this.selected) {
-          this.selected = null;
-        } else if (this.hovered) {
+        if (this.ProxyS.selected) {
+          this.ProxyS.selected = null;
+        } else if (this.hovered && this.hovered instanceof Vertex) {
           this.removeVertex(this.hovered);
         }
       }
       if (event.button == 0) {
         //left click
         if (this.hovered) {
-          this.select(this.hovered);
-          this.dragging = true;
-          return;
+          if (this.hovered instanceof Vertex) {
+            this.selectVexter(this.hovered);
+            this.dragging = true;
+            return;
+          } else {
+            this.selectSegment(this.hovered);
+            return;
+          }
         }
         this.graph.addVertex(this.mouse!);
-        this.select(this.mouse!);
+        this.selectVexter(this.mouse!);
         this.hovered = this.mouse;
       }
     });
@@ -112,33 +152,60 @@ export default class GraphEditor {
     this.canvas.addEventListener("mousemove", (location) => {
       this.mouse = this.viewport.getMouseAsVertex(location);
 
-      this.hovered = getNearestVertex(
+      let temp: Vertex | Segment | null = getNearestVertex(
         this.mouse,
         this.graph.vertexs,
         22 * this.viewport.zoom
       );
-      if (this.dragging == true && this.selected) {
-        this.selected.x = this.viewport.getMouse(location).x;
-        this.selected.y = this.viewport.getMouse(location).y;
+      if (temp == null) {
+        temp = getNearestSegment(
+          this.mouse,
+          this.graph.segments,
+          16 * this.viewport.zoom
+        );
+      }
+
+      this.hovered = temp;
+      if (this.dragging == true && this.ProxyS.selected) {
+        if (this.ProxyS.selected instanceof Vertex) {
+          this.ProxyS.selected!.x = this.viewport.getMouse(location).x;
+          this.ProxyS.selected!.y = this.viewport.getMouse(location).y;
+        }
       }
     });
   }
   private removeVertex(vertex: Vertex) {
     this.graph.removeVertex(vertex);
     this.hovered = null;
-    this.selected = null;
+    this.ProxyS.selected = null;
   }
 
   display() {
+    if (this.ProxyS.selected && this.ProxyS.selected instanceof Segment) {
+      this.ProxyS.selected.draw(this.ctx, this.EditorTheme, this.SegmentColor, {
+        width: 2,
+        isSelected: true,
+      });
+    }
+    if (this.hovered instanceof Segment) {
+      this.hovered.draw(this.ctx, this.EditorTheme, this.SegmentColor, {
+        width: 2,
+        isHover: true,
+      });
+    }
     this.graph.draw(
       this.ctx,
       this.EditorTheme,
       this.VertexColor,
       this.SegmentColor
     );
-    if (this.selected) {
-      const intent = this.hovered ? this.hovered : this.mouse!;
-      new Segment(this.selected, intent).draw(
+    if (this.ProxyS.selected && this.ProxyS.selected instanceof Vertex) {
+      const intent = this.hovered
+        ? this.hovered instanceof Vertex
+          ? this.hovered
+          : this.mouse!
+        : this.mouse!;
+      new Segment(this.ProxyS.selected, intent).draw(
         this.ctx,
         this.EditorTheme,
         this.SegmentColor,
@@ -147,11 +214,11 @@ export default class GraphEditor {
           dash: [20, 15],
         }
       );
-      this.selected.draw(this.ctx, this.EditorTheme, this.VertexColor, {
+      this.ProxyS.selected.draw(this.ctx, this.EditorTheme, this.VertexColor, {
         isSelected: true,
       });
     }
-    if (this.hovered) {
+    if (this.hovered instanceof Vertex) {
       this.hovered.draw(this.ctx, this.EditorTheme, this.VertexColor, {
         isHover: true,
       });
